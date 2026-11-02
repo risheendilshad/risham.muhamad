@@ -75,8 +75,11 @@ nav.scrolled::before{background:rgba(255,255,255,.88);backdrop-filter:blur(14px)
   display:flex;align-items:center;
   padding:120px 8vw 100px;
   position:relative;overflow:hidden;
-  background:linear-gradient(135deg,var(--white),var(--beige));
+  background:var(--beige);
 }
+/* full-bleed background photo: no gradient, no overlay */
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:72% 18%;z-index:0;animation:kb 20s ease-in-out infinite alternate}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.08)}}
 #particles{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
 .blob{position:absolute;border-radius:50%;filter:blur(60px);opacity:.5;z-index:0;animation:drift 14s ease-in-out infinite alternate}
 .b1{width:420px;height:420px;background:var(--sand);top:-120px;left:-120px}
@@ -93,9 +96,11 @@ nav.scrolled::before{background:rgba(255,255,255,.88);backdrop-filter:blur(14px)
 
 .hero-inner{
   position:relative;z-index:2;width:100%;max-width:1250px;margin:0 auto;
-  display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;
+  display:grid;grid-template-columns:minmax(0,640px) 1fr;gap:40px;align-items:center;
 }
-.hero-content{position:relative;z-index:2;min-width:0}
+/* text sits on a solid frosted panel so it is always clearly readable over the photo */
+.hero-content{position:relative;z-index:2;min-width:0;background:rgba(255,255,255,.68);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.7);border-radius:28px;padding:44px 46px;box-shadow:0 30px 70px rgba(58,47,34,.28);animation:cardIn 1s cubic-bezier(.2,.8,.2,1) 1.3s both}
+@keyframes cardIn{from{opacity:0;transform:translateX(-60px)}to{opacity:1;transform:none}}
 .hero-content .lead{max-width:560px}
 
 .badge{display:inline-flex;align-items:center;gap:10px;background:var(--white);border:1px solid var(--sand);padding:8px 18px;border-radius:50px;font-size:.78rem;color:var(--bronze);box-shadow:var(--shadow);margin-bottom:26px;position:relative;overflow:hidden;letter-spacing:.3px}
@@ -116,7 +121,7 @@ nav.scrolled::before{background:rgba(255,255,255,.88);backdrop-filter:blur(14px)
 .role{font-size:clamp(1.05rem,2.4vw,1.5rem);margin:18px 0 8px;color:var(--bronze);font-weight:500;min-height:2.4em}
 .role .caret{display:inline-block;width:2px;height:1.2em;background:var(--bronze);vertical-align:-3px;margin-left:3px;animation:blink 1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
-.hero p.lead{color:var(--muted);margin-bottom:34px}
+.hero p.lead{color:#3a2f22;font-weight:500;margin-bottom:30px}
 
 /* staged entrance for the non-name items */
 .hero-content .rise{opacity:0;transform:translateY(40px);animation:rise .9s cubic-bezier(.2,.8,.2,1) forwards}
@@ -136,8 +141,8 @@ nav.scrolled::before{background:rgba(255,255,255,.88);backdrop-filter:blur(14px)
 .btn:hover{box-shadow:0 18px 40px rgba(140,109,70,.3)}
 
 /* ---- photo block ---- */
-.hero-visual{position:relative;justify-self:center;width:min(100%,560px);aspect-ratio:1/1;perspective:900px}
-.tilt{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .25s ease-out}
+.hero-visual{position:absolute;right:5vw;bottom:34px;z-index:3;max-width:55vw}
+.tilt{display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end;transform:none!important}
 .ring{position:absolute;border-radius:50%;pointer-events:none}
 .ring.r1{inset:-26px;border:5px dashed var(--tan);animation:spin 26s linear infinite;opacity:.9}
 .ring.r2{inset:-52px;border:4px solid var(--sand);animation:spin 38s linear infinite reverse}
@@ -162,10 +167,10 @@ nav.scrolled::before{background:rgba(255,255,255,.88);backdrop-filter:blur(14px)
   33%{border-radius:32% 24% 30% 26% / 24% 32% 26% 30%}
   66%{border-radius:28% 32% 26% 30% / 32% 26% 30% 24%}
 }
-.fchip{position:absolute;z-index:3;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid var(--sand);border-radius:50px;padding:9px 16px;font-size:.78rem;font-weight:500;color:var(--bronze);box-shadow:var(--shadow);white-space:nowrap;opacity:0;animation:rise .9s ease forwards,floaty 5s ease-in-out infinite}
-.fchip.c1{top:8%;left:-14%;animation-delay:2.6s,2.6s}
-.fchip.c2{top:46%;right:-16%;animation-delay:2.9s,3.4s}
-.fchip.c3{bottom:6%;left:-6%;animation-delay:3.2s,4.1s}
+.fchip{position:relative;z-index:3;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid var(--sand);border-radius:50px;padding:9px 16px;font-size:.78rem;font-weight:500;color:var(--bronze);box-shadow:var(--shadow);white-space:nowrap;opacity:0;animation:rise .9s ease forwards,floaty 5s ease-in-out infinite}
+.fchip.c1{animation-delay:2.6s,2.6s}
+.fchip.c2{animation-delay:2.9s,3.4s}
+.fchip.c3{animation-delay:3.2s,4.1s}
 
 .scroll-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:2;display:flex;align-items:center;gap:12px;font-size:.78rem;color:var(--muted)}
 .mouse{width:24px;height:38px;border:2px solid var(--tan);border-radius:14px;position:relative}
@@ -301,25 +306,22 @@ footer b{color:var(--white)}
 @media(max-width:900px){
   section{padding:90px 6vw}
   .about-grid{grid-template-columns:1fr;gap:40px}
-  .hero{padding:96px 6vw 70px;min-height:auto;align-items:flex-start}
-  .hero-inner{grid-template-columns:1fr;gap:56px;text-align:center}
-  .hero-visual{order:-1;width:min(78vw,400px);margin-top:26px}
+  /* photo shows in the top part, text panel sits below it */
+  .hero{padding:calc(68vw + 28px) 6vw 56px;min-height:auto;align-items:flex-start;background:var(--cream)}
+  .hero-bg{bottom:auto;height:68vw;object-position:62% 15%;animation:none}
+  #particles{display:none}
+  .hero-inner{grid-template-columns:1fr;text-align:center}
+  .hero-content{padding:0;max-width:640px;margin:0 auto;background:none;backdrop-filter:none;-webkit-backdrop-filter:none;border:0;border-radius:0;box-shadow:none}
   .hero-content .lead{margin-left:auto;margin-right:auto}
   .btns{justify-content:center}
   .name-line{margin-left:auto;margin-right:auto}
-  .scroll-hint{display:none}
-  .fchip.c1{left:-8%}
-  .fchip.c2{right:-8%}
-  .fchip.c3{left:0}
-  .ring.r1{inset:-18px;border-width:4px}
-  .ring.r2,.orbit{inset:-36px}
-  .ring.r2{border-width:3px}
-  .orbit.o2{inset:-18px}
-  .b2,.b3{display:none}
+  .scroll-hint,.hero-visual{display:none}
 }
 @media(max-width:600px){
   section{padding:76px 5.5vw}
-  .hero{padding:90px 5.5vw 60px}
+  .hero{padding:calc(82vw + 24px) 6vw 40px}
+  .hero-bg{height:82vw}
+  .hero-content{padding:0}
   .hero-inner{gap:50px}
   .hero-visual{width:min(74vw,320px)}
   .badge{font-size:.66rem;padding:7px 13px;letter-spacing:0;text-align:left}
@@ -353,6 +355,82 @@ footer b{color:var(--white)}
   .scroll-hint{display:none}
 }
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+/* =====================================================
+   HERO v2 — reference layout: pretitle, big title, 2 buttons, scroll-down
+   ===================================================== */
+.hero-pretitle{display:inline-flex;align-items:center;gap:14px;text-transform:uppercase;letter-spacing:5px;font-size:.85rem;font-weight:600;color:var(--bronze);margin-bottom:18px;text-shadow:0 0 14px rgba(255,255,255,.9)}
+.hero-pretitle::before{content:"";width:46px;height:2px;background:var(--bronze)}
+.hero h1{line-height:1.05;text-shadow:0 0 28px rgba(255,255,255,.85),0 2px 10px rgba(255,255,255,.6)}
+.hero .role{text-shadow:0 0 16px rgba(255,255,255,.95),0 0 6px rgba(255,255,255,.8);font-weight:600;color:var(--bronze)}
+.btn.stroke{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+.btn.stroke:hover{background:var(--ink);color:var(--white)}
+.scroll-down{position:absolute;left:50%;bottom:28px;margin-left:-27px;z-index:3;width:54px;height:54px;border-radius:50%;border:2px solid var(--ink);display:grid;place-items:center;background:rgba(255,255,255,.55);animation:bob 2s ease-in-out infinite;transition:background .3s}
+.scroll-down svg{fill:var(--ink);transition:fill .3s}
+.scroll-down:hover{background:var(--ink)}
+.scroll-down:hover svg{fill:var(--white)}
+@keyframes bob{50%{transform:translateY(10px)}}
+@media(min-width:901px){
+  .hero{padding:120px 8vw 120px}
+  .hero-bg{object-position:72% 20%}
+  .hero-inner{display:block;max-width:none;margin:0}
+  .hero-content{background:none;backdrop-filter:none;-webkit-backdrop-filter:none;border:0;box-shadow:none;padding:0;border-radius:0;max-width:min(640px,50vw);animation:none}
+  .hero h1{font-size:clamp(2.6rem,5.4vw,5.2rem)}
+  /* small soft gradient behind the text block only (not the whole photo) */
+  .hero-content::before{content:"";position:absolute;z-index:-1;inset:-50px -90px -50px -70px;pointer-events:none;border-radius:50%;
+    background:radial-gradient(ellipse at 38% 50%,rgba(255,255,255,.82) 0%,rgba(255,255,255,.6) 40%,rgba(241,231,216,.28) 68%,rgba(255,255,255,0) 100%);
+    filter:blur(10px)}
+}
+@media(max-width:900px){
+  .hero{padding-bottom:110px}
+  .hero-pretitle{justify-content:center}
+  .hero-pretitle::before{display:none}
+  .hero-pretitle,.hero h1,.hero .role{text-shadow:none}
+  .scroll-down{background:var(--white);width:48px;height:48px;margin-left:-24px;bottom:30px}
+}
+
+/* =====================================================
+   CONNECT v2 — dark two-column section
+   ===================================================== */
+.connect{background:linear-gradient(135deg,#4a3a28 0%,#2f251a 100%);color:#fff;text-align:left;overflow:hidden;position:relative}
+.connect::before{content:"";position:absolute;width:560px;height:560px;right:-180px;top:-200px;border-radius:50%;background:radial-gradient(circle,rgba(196,169,127,.30),transparent 70%);pointer-events:none;animation:drift 14s ease-in-out infinite alternate}
+.connect::after{content:"";position:absolute;width:420px;height:420px;left:-160px;bottom:-200px;border-radius:50%;background:radial-gradient(circle,rgba(140,109,70,.45),transparent 70%);pointer-events:none;animation:drift 18s ease-in-out infinite alternate-reverse}
+.connect-layout{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.connect .eyebrow{color:var(--tan)}
+.connect .title{color:#fff;display:block}
+.connect .connect-text{color:var(--sand);max-width:520px}
+.callbig{display:inline-flex;align-items:center;gap:16px;margin-top:30px;padding:14px 30px 14px 14px;border-radius:70px;background:var(--bronze);color:#fff;box-shadow:0 16px 40px rgba(0,0,0,.35);transition:transform .3s,box-shadow .3s}
+.callbig:hover{transform:translateY(-5px);box-shadow:0 22px 50px rgba(0,0,0,.45)}
+.call-ic{position:relative;width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.18);display:grid;place-items:center;flex-shrink:0}
+.call-ic::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid rgba(255,255,255,.45);animation:ping 1.8s infinite}
+.call-ic svg{width:26px;height:26px;fill:#fff;animation:ringPhone 2.4s ease-in-out infinite}
+@keyframes ringPhone{0%,60%,100%{transform:rotate(0)}5%,15%,25%{transform:rotate(-14deg)}10%,20%,30%{transform:rotate(14deg)}}
+.call-tx{display:flex;flex-direction:column;line-height:1.25;text-align:left}
+.call-tx small{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--sand)}
+.call-tx b{font-family:'Playfair Display',serif;font-size:1.55rem;font-weight:700;letter-spacing:.5px}
+.avail{display:flex;align-items:center;gap:12px;margin-top:22px;font-size:.88rem;color:var(--sand)}
+.avail i{width:9px;height:9px;border-radius:50%;background:#7bb87b;position:relative;flex-shrink:0}
+.avail i::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:2px solid #7bb87b;animation:ping 1.6s infinite}
+
+.connect .social-grid{display:flex;flex-direction:column;gap:14px;margin-top:0}
+.connect .social{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);box-shadow:none;color:#fff;padding:18px 22px;border-radius:18px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.connect .social:hover{transform:translateX(10px);box-shadow:0 14px 34px rgba(0,0,0,.35);border-color:var(--tan)}
+.connect .social .ic{background:rgba(255,255,255,.1)}
+.connect .social svg{color:var(--tan)}
+.connect .social h4{color:#fff}
+.connect .social span{color:var(--sand);font-size:.82rem}
+.connect .social:hover span,.connect .social:hover h4{color:#fff}
+.connect .social .arrow{color:var(--tan)}
+footer{background:#241c13;border-top:1px solid rgba(255,255,255,.08)}
+@media(max-width:900px){
+  .connect-layout{grid-template-columns:1fr;gap:44px}
+  .connect .connect-text{max-width:none}
+}
+@media(max-width:600px){
+  .callbig{padding-right:22px}
+  .call-tx b{font-size:1.25rem}
+  .connect .social{padding:16px}
+}
 </style>
 </head>
 <body>
@@ -367,7 +445,6 @@ footer b{color:var(--white)}
     <li><a href="#about">About</a></li>
     <li><a href="#sila">Sila International</a></li>
     <li><a href="#expertise">Expertise</a></li>
-    <li><a href="#journey">Journey</a></li>
     <li><a href="#connect">Connect</a></li>
   </ul>
   <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -375,43 +452,25 @@ footer b{color:var(--white)}
 
 <!-- HERO -->
 <header class="hero" id="home">
+  <!-- >>> Put his photo next to this HTML file and name it risham.jpeg <<< -->
+  <img class="hero-bg" src="risham.jpeg" alt="Risham Muhamad" onerror="this.style.display='none'">
   <canvas id="particles"></canvas>
-  <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
-  <div class="shape s1"></div><div class="shape s2"></div><div class="shape s3"></div><div class="shape s4"></div>
 
   <div class="hero-inner">
     <div class="hero-content">
-      <div class="badge rise r1"><i></i> ENTREPRENEURSHIP · STRATEGY · COMMERCIAL DEVELOPMENT</div>
-      <h1 id="name" aria-label="Risham Muhamad"></h1>
-      <div class="name-line"></div>
+      <div class="hero-pretitle rise r1">Hello</div>
+      <h1 id="name" aria-label="I'm Risham, entrepreneur."></h1>
       <div class="role rise r2"><span id="typed"></span><span class="caret"></span></div>
-      <p class="lead rise r3">An entrepreneur and business development professional focused on commercial growth, operational excellence, strategic relationships and the development of sustainable business ventures.</p>
       <div class="btns rise r4">
-        <a href="#connect" class="btn primary magnetic">Professional Enquiries →</a>
-        <a href="#expertise" class="btn ghost magnetic">Explore Expertise</a>
-      </div>
-    </div>
-
-    <!-- >>> Put his photo next to this HTML file and name it risham.jpeg <<< -->
-    <div class="hero-visual" id="visual">
-      <div class="tilt" id="tilt">
-        <div class="ring r1"></div>
-        <div class="ring r2"></div>
-        <div class="orbit"></div>
-        <div class="orbit o2"></div>
-        <div class="photo-glow"></div>
-        <div class="photo-frame">
-          <div class="ph">RM</div>
-          <img src="risham.jpeg" alt="Risham Muhamad" onerror="this.style.display='none'">
-        </div>
-        <div class="fchip c1">🚀 Entrepreneur</div>
-        <div class="fchip c2">🌐 B2B · UAE Market</div>
-        <div class="fchip c3">🛡️ Quality Assurance</div>
+        <a href="#about" class="btn primary magnetic">More About Me</a>
+        <a href="#connect" class="btn stroke magnetic">Get In Touch</a>
       </div>
     </div>
   </div>
 
-  <div class="scroll-hint"><div class="mouse"></div> Scroll</div>
+  <a href="#about" class="scroll-down" aria-label="Scroll down">
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path d="M11.178 19.569a.998.998 0 0 0 1.644 0l9-13A.999.999 0 0 0 21 5H3a1.002 1.002 0 0 0-.822 1.569l9 13z"/></svg>
+  </a>
 </header>
 
 <div class="marquee"><div id="marq"></div></div>
@@ -427,13 +486,13 @@ footer b{color:var(--white)}
     <div class="reveal right">
       <div class="eyebrow">Professional Profile</div>
       <h2 class="title">Business perspective. Technical foundation.</h2>
-      <p class="txt">I am Risham Muhamad, an entrepreneur and business development professional with a background spanning food technology, quality assurance, sales, operations management and commercial development.</p>
+      <p class="txt">I am Risham Muhamad, an entrepreneur and business development professional with a background spanning quality assurance, sales, operations management and commercial development.</p>
       <p class="txt">My professional background combines technical knowledge of food safety and quality systems with practical business understanding in operations, client relationship management, market development and commercial coordination.</p>
       <p class="txt">I approach business with a focus on identifying market opportunities, establishing strategic relationships, improving operational effectiveness and developing commercially viable solutions.</p>
       <div class="chips">
         <span class="chip">Entrepreneurship</span><span class="chip">Business Development</span>
         <span class="chip">Commercial Strategy</span><span class="chip">Operations</span>
-        <span class="chip">Food Technology</span><span class="chip">Quality Assurance</span>
+        <span class="chip">Quality Assurance</span>
       </div>
     </div>
   </div>
@@ -506,46 +565,49 @@ footer b{color:var(--white)}
   </div>
 </section>
 
-<!-- JOURNEY -->
-<section id="journey" style="background:var(--white)">
-  <div class="container">
-    <div class="eyebrow reveal">Professional Journey</div>
-    <h2 class="title reveal d1">Experience &amp; Development</h2>
-    <div class="timeline" id="timeline">
-      <div class="fill" id="fill"></div>
-      <div class="tl reveal left"><small>EDUCATION</small><h3>B.Tech in Food Technology</h3><p>Developed a technical foundation in food science, processing, quality and safety principles.</p></div>
-      <div class="tl reveal right"><small>QUALITY &amp; FOOD SAFETY</small><h3>Quality Assurance &amp; Compliance</h3><p>Built professional knowledge in food safety practices, quality management, compliance and operational standards.</p></div>
-      <div class="tl reveal left"><small>COMMERCIAL DEVELOPMENT</small><h3>Sales &amp; Business Operations</h3><p>Expanded professional focus into commercial coordination, client relationships, business operations and market opportunities.</p></div>
-      <div class="tl reveal right"><small>ENTREPRENEURSHIP</small><h3>Sila International</h3><p>Developing a business venture focused on trading, distribution opportunities, supplier partnerships and market development.</p></div>
-    </div>
-  </div>
-</section>
+
 
 <!-- CONNECT -->
 <section class="connect" id="connect">
-  <div class="container">
-    <div class="eyebrow reveal">Professional Enquiries</div>
-    <h2 class="title reveal d1" style="display:inline-block">Let's Build Meaningful Connections</h2>
-    <p class="reveal d2" style="color:var(--muted)">I welcome opportunities to connect with business leaders, manufacturers, entrepreneurs and potential strategic partners to explore shared interests and commercial opportunities.</p>
+  <div class="container connect-layout">
+
+    <div class="connect-info">
+      <div class="eyebrow reveal">Professional Enquiries</div>
+      <h2 class="title reveal d1">Let's Build Meaningful Connections</h2>
+      <p class="connect-text reveal d2">I welcome opportunities to connect with business leaders, manufacturers, entrepreneurs and potential strategic partners to explore shared interests and commercial opportunities.</p>
+
+      <a class="callbig reveal d3" href="tel:+971552898664">
+        <span class="call-ic"><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></span>
+        <span class="call-tx"><small>Call directly · UAE</small><b>+971 55 289 8664</b></span>
+      </a>
+
+      <div class="avail reveal d4"><i></i> Open to new partnerships</div>
+    </div>
+
     <div class="social-grid">
       <!-- >>> Replace the href values with his real profile links <<< -->
-      <a class="social reveal zoom d1 magnetic" href="https://www.linkedin.com/in/risham-muhamad-438917200/" target="_blank" rel="noopener">
+      <a class="social reveal zoom d1" href="https://www.linkedin.com/in/risham-muhamad-438917200/" target="_blank" rel="noopener">
         <div class="ic"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 11-.01 5 2.5 2.5 0 01.01-5zM3 9.75h4V21H3zM9.5 9.75h3.8v1.6h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.65 4.77 6.1V21h-4v-4.9c0-1.17-.02-2.67-1.63-2.67-1.63 0-1.88 1.27-1.88 2.58V21h-4z"/></svg></div>
         <div><h4>LinkedIn</h4><span>Professional network</span></div><div class="arrow">↗</div>
       </a>
-      <a class="social reveal zoom d2 magnetic" href="https://wa.me/+971552898664" target="_blank" rel="noopener">
+      <a class="social reveal zoom d2" href="https://wa.me/+971552898664" target="_blank" rel="noopener">
         <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18.2c-1.5 0-2.9-.4-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1-1.4-.7-2.4-1.2-3.3-2.8-.2-.3.2-.3.7-1.1.1-.1 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 00-.7.3c-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.2.2 1.8 2.8 4.4 3.9 1.6.7 2.3.7 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.2-.2-.2-.5-.4z"/></svg></div>
         <div><h4>WhatsApp</h4><span>Chat directly</span></div><div class="arrow">↗</div>
       </a>
-      <a class="social reveal zoom d3 magnetic" href="https://www.instagram.com/bruuh_ian?utm_source=ig_web_button_share_sheet&cplk=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener">
+      <a class="social reveal zoom d3" href="tel:+971552898664">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div>
+        <div><h4>Call</h4><span>+971 55 289 8664</span></div><div class="arrow">↗</div>
+      </a>
+      <a class="social reveal zoom d3" href="https://www.instagram.com/bruuh_ian?utm_source=ig_web_button_share_sheet&cplk=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener">
         <div class="ic"><svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm0 2a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3zm5 3.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9zm0 2a2.5 2.5 0 100 5 2.5 2.5 0 000-5zm5.3-3.3a1.1 1.1 0 110 2.2 1.1 1.1 0 010-2.2z"/></svg></div>
         <div><h4>Instagram</h4><span>Personal profile</span></div><div class="arrow">↗</div>
       </a>
-      <a class="social reveal zoom d4 magnetic" href="https://www.facebook.com/YOUR-FACEBOOK" target="_blank" rel="noopener">
+      <a class="social reveal zoom d4" href="https://www.facebook.com/YOUR-FACEBOOK" target="_blank" rel="noopener">
         <div class="ic"><svg viewBox="0 0 24 24"><path d="M13.5 22v-8.2h2.8l.5-3.4h-3.3V8.3c0-1 .4-1.7 1.8-1.7h1.6V3.5c-.3 0-1.3-.1-2.4-.1-2.5 0-4.1 1.5-4.1 4.2v2.8H7.6v3.4h2.8V22z"/></svg></div>
         <div><h4>Facebook</h4><span>Connect online</span></div><div class="arrow">↗</div>
       </a>
     </div>
+
   </div>
 </section>
 
@@ -556,26 +618,29 @@ footer b{color:var(--white)}
 /* loader */
 window.addEventListener('load',()=>setTimeout(()=>document.getElementById('loader').classList.add('done'),1500));
 
-/* split heading letters (word-safe so it wraps nicely on small screens) */
+/* split heading letters, two lines */
 const nameEl=document.getElementById('name');
 (function(){
-  const words="Risham Muhamad".split(' ');let idx=0;
-  words.forEach((w,wi)=>{
-    const ws=document.createElement('span');ws.className='word';
-    [...w].forEach(c=>{
-      const s=document.createElement('span');
-      s.className='ch'+(wi===1?' accent':'');
-      s.textContent=c;
-      s.style.animationDelay=(1.7+idx*0.06)+'s';idx++;
-      ws.appendChild(s);
+  const lines=["I'm Risham,","entrepreneur."];let idx=0;
+  lines.forEach((line,li)=>{
+    line.split(' ').forEach((w,wi,arr)=>{
+      const ws=document.createElement('span');ws.className='word';
+      [...w].forEach(c=>{
+        const sp=document.createElement('span');
+        sp.className='ch'+(li===1?' accent':'');
+        sp.textContent=c;
+        sp.style.animationDelay=(1.7+idx*0.05)+'s';idx++;
+        ws.appendChild(sp);
+      });
+      nameEl.appendChild(ws);
+      if(wi<arr.length-1)nameEl.appendChild(document.createTextNode(' '));
     });
-    nameEl.appendChild(ws);
-    if(wi<words.length-1)nameEl.appendChild(document.createTextNode(' '));
+    if(li<lines.length-1)nameEl.appendChild(document.createElement('br'));
   });
 })();
 
 /* typewriter */
-const roles=["Entrepreneur & Business Development Professional","Commercial Strategy & Market Development","Food Technology & Quality Assurance","Sustainable Venture Development"];
+const roles=["Entrepreneur & Business Development Professional","Commercial Strategy & Market Development","Quality Assurance & Operational Excellence","Sustainable Venture Development"];
 const t=document.getElementById('typed');let ri=0,ci=0,del=false;
 (function type(){
   const w=roles[ri];
@@ -651,22 +716,6 @@ addEventListener('mousemove',e=>{
   const x=(e.clientX/innerWidth-.5),y=(e.clientY/innerHeight-.5);
   document.querySelectorAll('.shape').forEach((s,i)=>s.style.translate=`${x*(30+i*18)}px ${y*(30+i*18)}px`);
 });
-
-/* hero photo 3D tilt: mouse on desktop, device tilt / touch on mobile */
-(function(){
-  const tilt=document.getElementById('tilt'),hero=document.getElementById('home');
-  function set(x,y){tilt.style.transform=`rotateY(${x*14}deg) rotateX(${-y*14}deg)`}
-  hero.addEventListener('mousemove',e=>{
-    const r=hero.getBoundingClientRect();
-    set((e.clientX-r.left)/r.width-.5,(e.clientY-r.top)/r.height-.5);
-  });
-  hero.addEventListener('mouseleave',()=>tilt.style.transform='');
-  hero.addEventListener('touchmove',e=>{
-    const r=tilt.getBoundingClientRect(),p=e.touches[0];
-    set(Math.max(-.5,Math.min(.5,(p.clientX-r.left)/r.width-.5)),Math.max(-.5,Math.min(.5,(p.clientY-r.top)/r.height-.5)));
-  },{passive:true});
-  hero.addEventListener('touchend',()=>tilt.style.transform='');
-})();
 
 /* hero particle network */
 (function(){
